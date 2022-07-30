@@ -1,18 +1,27 @@
 {
   "name": "instagram-without-api-node",
-  "version": "1.0.0",
-  "license": "MIT",
+  "version": "1.0.1",
   "description": "Just a simple Node.js code to get instagram public pictures by user or by tag without api.",
-  "authors": [
-    {
-      "name": "Francesco Orsi",
-      "email": "hello@orsi.me"
-    }
-  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "instagram",
+    "scraping",
+    "without credentials",
+    "without api",
+    "no credentials",
+    "no api"
+  ],
+  "author": "Francesco Orsi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orsifrancesco/instagram-without-api-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/orsifrancesco/instagram-without-api-node/issues"
+  },
+  "homepage": "https://github.com/orsifrancesco/instagram-without-api-node#readme"
 }

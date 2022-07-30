@@ -18,9 +18,9 @@ npm install instagram-without-api-node
   3. Select "Headers" bar
   4. Be sure the file is Request Method "POST" (if it is "OPTIONS" search the other "timeline/" file in the list)
   5. Scroll down and select "Request Headers" tab
-  6. Copy all the code after the word "cookie: " and paste it on `$cookie` variable
-  7. Copy all the code after the word "user-agent: " and paste it on `$userAgent` variable
-  8. Copy all the code after the word "x-ig-app-id: " and paste it on `$xIgAppId` variable
+  6. Copy all the code after the word "cookie: " and paste it on `_cookie` variable
+  7. Copy all the code after the word "user-agent: " and paste it on `_userAgent` variable
+  8. Copy all the code after the word "x-ig-app-id: " and paste it on `_xIgAppId` variable
 ```diff
 - don't share your cookie code with anyone!!! it is the same of your credentials
 ```
@@ -40,7 +40,7 @@ You can easily show the image data on your project with the following snippets o
 .example { background-image: url('data:image/jpg;base64, hereYourBase64String..'); }
 ```
 
-Check https://orsifrancesco.github.io/instagram-without-api-node/how-to-show-base64-images.html for Base64 example.
+Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
 ## Example
 example on https://github.com/orsifrancesco/instagram-without-api-node/blob/master/test.js
@@ -78,7 +78,7 @@ fetch()
 ```
 
 ## JSON output
-output example on https://github.com/orsifrancesco/instagram-without-api-node/blob/master/instagram-cache.json
+output example on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
 [
