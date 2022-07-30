@@ -31,7 +31,8 @@ function iwa({
                 if (!error && res.statusCode == 200) {
                     resolve(body);
                 } else {
-                    reject(error);
+                    // reject(error);
+                    resolve(false)
                 }
             });
         });
@@ -62,9 +63,10 @@ function iwa({
                     }));
                     result = mappedItems;
                     fs.writeFileSync(file, JSON.stringify(result, null, pretty ? 2 : null));
-                    resolve(result);
+                    resolve(result)
                 } else {
-                    reject(error);
+                    // reject(error)
+                    resolve(result)
                 }
             });
         });
@@ -72,18 +74,21 @@ function iwa({
 
     function init() {
         return new Promise(function (resolve, reject) {
+            let result;
             try {
                 fs.stat(file, async (err, stats) => {
                     if (err) { throw err; }
-                    let result;
-                    const date = new Date();
+                    const date = new Date()
                     const unixTimestampNow = Math.floor(date.getTime() / 1000)
                     const unixTimestamp = Math.floor(stats.mtime.getTime() / 1000)
                     if (unixTimestampNow - unixTimestamp >= time) result = await requestAsync(options)
                     else result = JSON.parse(fs.readFileSync(file, 'utf8') || {})
-                    resolve(result);
+                    resolve(result)
                 });
-            } catch (err) { reject(err); }
+            } catch (err) {
+                result = await requestAsync(options)
+                resolve(result)
+            }
         });
     }
 
