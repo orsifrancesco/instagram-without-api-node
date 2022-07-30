@@ -1,6 +1,6 @@
 {
   "name": "instagram-without-api-node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Just a simple Node.js code to get instagram public pictures by user or by tag without api.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "url": "https://github.com/orsifrancesco/instagram-without-api-node/issues"
   },
   "homepage": "https://github.com/orsifrancesco/instagram-without-api-node#readme",
-  "devDependencies": {
+  "dependencies": {
     "request": "^2.88.2"
   }
 }
