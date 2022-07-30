@@ -31,8 +31,7 @@ function iwa({
                 if (!error && res.statusCode == 200) {
                     resolve(body);
                 } else {
-                    // reject(error);
-                    resolve(false)
+                    reject(error);
                 }
             });
         });
@@ -40,11 +39,12 @@ function iwa({
 
     function requestAsync(options) {
         let result = []
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve) {
             request(options, async (error, res, body) => {
                 if (!error && res.statusCode == 200) {
-                    const json = JSON.parse(body);
-                    const items = json?.data?.user?.edge_owner_to_timeline_media?.edges;
+                    let json = false
+                    try { json = JSON.parse(body); } catch (e) { }
+                    const items = json?.data?.user?.edge_owner_to_timeline_media?.edges || [];
                     const filteredItems = items.filter((el, index) => { return !maxImages ? el : index < maxImages });
                     const mappedItems = await Promise.all(filteredItems.map(async (el) => {
                         const imageBody = base64images ? await requestAsyncImage(el['node']['display_url']) : false;
@@ -62,33 +62,32 @@ function iwa({
                         return obj
                     }));
                     result = mappedItems;
-                    fs.writeFileSync(file, JSON.stringify(result, null, pretty ? 2 : null));
-                    resolve(result)
-                } else {
-                    // reject(error)
-                    resolve(result)
                 }
+                fs.writeFileSync(file, JSON.stringify(result, null, pretty ? 2 : null));
+                resolve(result);
             });
         });
     }
 
     function init() {
-        return new Promise(function (resolve, reject) {
-            let result;
+        return new Promise(function (resolve) {
+            let result = [];
             try {
                 fs.stat(file, async (err, stats) => {
-                    if (err) { throw err; }
-                    const date = new Date()
+                    if (err) {
+                        result = await requestAsync(options)
+                        resolve(result);
+                        return;
+                    }
+                    const date = new Date();
                     const unixTimestampNow = Math.floor(date.getTime() / 1000)
                     const unixTimestamp = Math.floor(stats.mtime.getTime() / 1000)
+                    // console.log(unixTimestampNow - unixTimestamp >= time);
                     if (unixTimestampNow - unixTimestamp >= time) result = await requestAsync(options)
-                    else result = JSON.parse(fs.readFileSync(file, 'utf8') || {})
-                    resolve(result)
+                    else result = JSON.parse(fs.readFileSync(file, 'utf8') || [])
+                    resolve(result);
                 });
-            } catch (err) {
-                result = await requestAsync(options)
-                resolve(result)
-            }
+            } catch (err) { resolve(result); }
         });
     }
 

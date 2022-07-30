@@ -14,6 +14,7 @@ async function fetch() {
             'x-ig-app-id': _xIgAppId
         },
 
+        base64images: true,                     // <!-- optional, but without it, you will be not able to store/show images
         maxImages: 2,                           // <!-- optional, 12 is the max number
         file: "instagram-cache.json",           // <!-- optional, instagram-cache.json is by default
         pretty: true,                           // <!-- optional, prettyfy json true/false
