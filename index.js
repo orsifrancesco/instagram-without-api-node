@@ -1,6 +1,6 @@
 const request = require('request');
-const base64 = require('./base64');
-var fs = require("fs");
+const imageToBase64 = require('image-to-base64');
+const fs = require("fs");
 
 function iwa({
     id,
@@ -47,8 +47,8 @@ function iwa({
                     const items = json?.data?.user?.edge_owner_to_timeline_media?.edges || [];
                     const filteredItems = items.filter((el, index) => { return !maxImages ? el : index < maxImages });
                     const mappedItems = await Promise.all(filteredItems.map(async (el) => {
-                        const imageBody = base64images ? await requestAsyncImage(el['node']['display_url']) : false;
-                        const image = imageBody ? base64.encode(imageBody) : false;
+                        const imageBody = base64images ? await imageToBase64(el['node']['display_url']) : false;
+                        const image = imageBody || false;
                         let obj = {
                             id: el['node']['id'],
                             time: el['node']['taken_at_timestamp'],
