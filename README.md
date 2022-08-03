@@ -1,8 +1,23 @@
-This is a Node.js library, are you looking for the same in PHP? go to https://github.com/orsifrancesco/instagram-without-api.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
+</p>
+<h1 align="center">Instagram Without APIs</h1>
+<h2 align="center">Instagram Scraping in August 2022, no credentials required</h2>
 
-# Instagram Scraping in August 2022, no credentials required
+<br/>
+
+This is a Node.js library, are you looking for the same in PHP? go to https://orsi.me/instagram-without-api/.
 
 A simple Node.js code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
+
+<br/>
+
+### [📦 npm link](https://www.npmjs.com/package/instagram-without-api-node)
+### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
+### ⚖️ Licensed under MIT
+### 🤓 [@orsifrancesco](https://twitter.com/orsifrancesco)
+
+<br/><hr/><br/>
 
 ## Installation
 
