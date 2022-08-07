@@ -1,8 +1,8 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
-<h1 align="center">Instagram Without APIs</h1>
-<h2 align="center">Instagram Scraping in August 2022, no credentials required</h2>
+<h2 align="center">Instagram Without APIs</h2>
+<h3 align="center">Instagram Scraping in August 2022, no credentials required</h3>
 
 <br/>
 
@@ -10,16 +10,18 @@ This is a Node.js library, are you looking for the same in PHP? go to https://or
 
 A simple Node.js code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
 
-<br/>
+You can get the latest pictures/information from an account or a single picture/information by id.
 
 ### [📦 npm link](https://www.npmjs.com/package/instagram-without-api-node)
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
-### 🤓 [@orsifrancesco](https://twitter.com/orsifrancesco)
+### 🤓 Author [@orsifrancesco](https://twitter.com/orsifrancesco)
+### ☕ [Offer me a coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96)
+<!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
-<br/><hr/><br/>
+<hr/>
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm i instagram-without-api-node
@@ -30,7 +32,7 @@ npm i instagram-without-api-node
 node test.js
 ```
 
-## How to get Instagram Cookie
+## 🍪 How to get Instagram Cookie
 
 - Login to Instagram
 - Go to your https://instagram/yourUsername
@@ -50,7 +52,7 @@ node test.js
 
 ![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
 
-## Images Base64
+## 💻 Images Base64
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
 To solve this problem you will get all the URLs and all the images data in base64.\
 You can easily show the image data on your project with the following snippets of code:
@@ -64,11 +66,11 @@ You can easily show the image data on your project with the following snippets o
 
 Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
-## Example
+## 🎮 Demo / Example
 example on https://github.com/orsifrancesco/instagram-without-api-node/blob/master/test.js
 
 ```js
-const iwa = require('instagram-without-api-node');
+const { iwa, iwaId, iwaIdUrl } = require('instagram-without-api-node');
 
 const _cookie = 'mid=Ywj....hFLUdjNT55f0"'      // <!-- required!! please get your cookie from your browser console (6)
 const _userAgent = 'Mozilla/5.0.../537.36'      // <!-- required!! please get your user-agent from your browser console (7)
@@ -76,7 +78,9 @@ const _xIgAppId = '93661974...'                 // <!-- required!! please get yo
 
 async function fetch() {
 
-    const response = await iwa({
+    // get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+
+    const responseIwa = await iwa({
 
         headers: {
             'cookie': _cookie,
@@ -84,7 +88,7 @@ async function fetch() {
             'x-ig-app-id': _xIgAppId
         },
 
-        base64images: true,                     // <!-- optional, but without it, you will be not able to store/show images
+        base64images: false,                    // <!-- optional, but without it, you will be not able to store/show images
         maxImages: 2,                           // <!-- optional, 12 is the max number
         file: "instagram-cache.json",           // <!-- optional, instagram-cache.json is by default
         pretty: true,                           // <!-- optional, prettyfy json true/false
@@ -94,14 +98,60 @@ async function fetch() {
 
     })
 
-    console.log({ response });
+    console.log({ responseIwa });
+
+
+
+    // get picture and info from instagram id url (example https://www.instagram.com/p/Cgczi6qMuh1/)
+
+    const responseIwaIdUrl = await iwaIdUrl({
+
+        headers: {
+            'cookie': _cookie,
+            'user-agent': _userAgent,
+            'x-ig-app-id': _xIgAppId
+        },
+
+        base64images: false,                    // <!-- optional, but without it, you will be not able to store/show images
+        file: "instagram-cache-byidurl.json",   // <!-- optional, instagram-cache.json is by default
+        pretty: true,                           // <!-- optional, prettyfy json true/false
+        time: 3600,                             // <!-- optional, reload contents after 3600 seconds by default
+
+        id: "Cgczi6qMuh1"                       // <!-- id is required
+
+    })
+
+    console.log({ responseIwaIdUrl });
+
+
+
+    // get picture and info from instagram id (2890411760684296309 is the id of https://www.instagram.com/p/Cgczi6qMuh1/)
+
+    const responseIwaId = await iwaId({
+
+        headers: {
+            'cookie': _cookie,
+            'user-agent': _userAgent,
+            'x-ig-app-id': _xIgAppId
+        },
+
+        base64images: false,                    // <!-- optional, but without it, you will be not able to store/show images
+        file: "instagram-cache-byid.json",      // <!-- optional, instagram-cache.json is by default
+        pretty: true,                           // <!-- optional, prettyfy json true/false
+        time: 3600,                             // <!-- optional, reload contents after 3600 seconds by default
+
+        id: "2890411760684296309"               // <!-- id is required
+
+    })
+
+    console.log({ responseIwaId });
 
 }
 fetch()
 ```
 
-## JSON output
-output example on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
+## 🕹️ JSON outputs
+output example for `iwa` function on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
 [
@@ -128,6 +178,48 @@ output example on https://github.com/orsifrancesco/instagram-without-api/blob/ma
 ]
 ```
 
-## License
+output example for `iwaId` or `iwaIdUrl` functions
+```json
+[
+  {
+    "id": "289855367...",
+    "width": 1385,
+    "height": 1731,
+    "imageUrl": "https:\/\/scontent-lhr8-1.cdnin...",
+    "time": 1659754546,
+    "topLikers": [
+        "franko"
+    ],
+    "likes": 32,
+    "commentCount": 2,
+    "comments": [
+      {
+        "time": 1659756069,
+        "text": "This is a comment...",
+        "user": {
+          "username": "test",
+          "fullName": "DearTest",
+          "imageUrl": "https:\/\/scontent-lhr8-1.cdninstagram.com..."
+        }
+      }
+    ],
+    "link": "https:\/\/www.instagram.com\/p\/Cgczi6qMuh1\/",
+    "text": "If you know it, you know it...",
+    "user": {
+      "username": "orsifrancesco",
+      "fullName": "Frank",
+      "imageUrl": "https:\/\/scontent-lhr8-1.cd..."
+    },
+    "image": "\/9j\/4AAQSkZJR....Q=="
+  }
+]
+```
+
+## ⚖️ License
 
 Licensed under MIT
+
+
+## ☕ About
+
+Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and/or [coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) is welcome :) 

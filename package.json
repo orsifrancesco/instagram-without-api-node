@@ -1,7 +1,7 @@
 {
   "name": "instagram-without-api-node",
-  "version": "1.0.7",
-  "description": "Just a simple Node.js code to get instagram public pictures by user or by tag without api.",
+  "version": "1.0.8",
+  "description": "A simple Node.js code to get unlimited instagram public pictures by every user without api, without credentials (just token from cookies), just Instagram Scraping (with cookie and image data in base64).",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/orsifrancesco/instagram-without-api-node/issues"
   },
-  "homepage": "https://github.com/orsifrancesco/instagram-without-api-node#readme",
+  "homepage": "https://orsi.me/instagram-without-api/",
   "dependencies": {
     "image-to-base64": "^2.2.0",
     "request": "^2.88.2"
