@@ -1,6 +1,6 @@
 {
   "name": "instagram-without-api-node",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simple Node.js code to get unlimited instagram public pictures by every user without api, without credentials (just token from cookies), just Instagram Scraping (with cookie and image data in base64).",
   "main": "index.js",
   "scripts": {
