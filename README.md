@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
 <h2 align="center">Instagram Without APIs</h2>
-<h3 align="center">Instagram Scraping in August 2022, no credentials required</h3>
+<h3 align="center">Instagram Scraping in October 2022, no credentials required</h3>
 
 <br/>
 
