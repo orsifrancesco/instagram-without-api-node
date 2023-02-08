@@ -237,7 +237,7 @@ function iwa({
                             likes: el['node']['edge_liked_by']['count'],
                             comments: el['node']['edge_media_to_comment']['count'],
                             link: 'https://www.instagram.com/p/' + el['node']['shortcode'] + '/',
-                            text: el['node']['edge_media_to_caption']['edges'][0]['node']['text']
+                            text: el['node']['edge_media_to_caption']['edges'][0]?.['node']['text']
                         }
                         if (image) obj.image = image;
                         return obj
