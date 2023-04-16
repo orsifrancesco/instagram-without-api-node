@@ -2,21 +2,22 @@
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
 <h2 align="center">Instagram Without APIs</h2>
-<h3 align="center">Instagram Scraping in October 2022, no credentials required</h3>
+<h3 align="center">Instagram Scraping <strong>(@users and #tags)</strong> in April 2023, no credentials required</h3>
 
 <br/>
 
 This is a Node.js library, are you looking for the same in PHP? go to https://orsi.me/instagram-without-api/.
 
-A simple Node.js code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
+A simple Node.js code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2023 (with cookie and image data in base64).
 
 You can get the latest pictures/information from an account or a single picture/information by id.
 
+### [🛕 Cool Project Example](https://orsi.me/sniffagram) <a href="https://orsi.me/sniffagram" rel="sniffagram"><img style="vertical-align: middle" alt="sniffagram" width="100" src="https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg" /></a>
 ### [📦 npm link](https://www.npmjs.com/package/instagram-without-api-node)
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
 ### 🤓 Author [@orsifrancesco](https://twitter.com/orsifrancesco)
-### ☕ [Offer me a coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96)
+### ☕ [Coffees are welcome](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) <small>(in particular if you appreciate the project or you plan to contact me)</small>
 <!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
 <hr/>
@@ -66,11 +67,14 @@ You can easily show the image data on your project with the following snippets o
 
 Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
+## 🛕 Cool Project Example
+<a href="https://orsi.me/sniffagram" rel="sniffagram">![sniffagram](https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg "sniffagram")</a>
+
 ## 🎮 Demo / Example
 example on https://github.com/orsifrancesco/instagram-without-api-node/blob/master/test.js
 
 ```js
-const { iwa, iwaId, iwaIdUrl } = require('instagram-without-api-node');
+const { iwaTag, iwa, iwaId, iwaIdUrl } = require('instagram-without-api-node');
 
 const _cookie = 'mid=Ywj....hFLUdjNT55f0"'      // <!-- required!! please get your cookie from your browser console (6)
 const _userAgent = 'Mozilla/5.0.../537.36'      // <!-- required!! please get your user-agent from your browser console (7)
@@ -78,9 +82,14 @@ const _xIgAppId = '93661974...'                 // <!-- required!! please get yo
 
 async function fetch() {
 
-    // get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+    // get the latest 12 feeds from a tag (example https://instagram.com/explore/tags/love)
 
-    const responseIwa = await iwa({
+    const responseIwaTag = await iwaTag({
+
+        group: 'recent',                        // <!-- "recent" images or "top" images; "recent" is by default 
+        base64images: true,                     // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+        base64imagesCarousel: false,            // <!-- optional but not recommended, it increases the size of the json file
+        base64videos: false,                    // <!-- optional but not recommended, it increases the size of the json file
 
         headers: {
             'cookie': _cookie,
@@ -88,7 +97,33 @@ async function fetch() {
             'x-ig-app-id': _xIgAppId
         },
 
-        base64images: false,                    // <!-- optional, but without it, you will be not able to store/show images
+        maxImages: 2,                           // <!-- optional, 12 is the max number
+        file: "instagram-cache-bytag.json",     // <!-- optional, instagram-cache.json is by default
+        pretty: true,                           // <!-- optional, prettyfy json true/false
+        time: 3600,                             // <!-- optional, reload contents after 3600 seconds by default
+
+        id: "love"                              // <!-- id is required
+
+    })
+
+    console.log({ responseIwaTag });
+
+
+
+    // get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+
+    const responseIwa = await iwa({
+
+        base64images: true,                     // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+        base64imagesCarousel: false,            // <!-- optional but not recommended, it increases the size of the json file
+        base64videos: false,                    // <!-- optional but not recommended, it increases the size of the json file
+
+        headers: {
+            'cookie': _cookie,
+            'user-agent': _userAgent,
+            'x-ig-app-id': _xIgAppId
+        },
+
         maxImages: 2,                           // <!-- optional, 12 is the max number
         file: "instagram-cache.json",           // <!-- optional, instagram-cache.json is by default
         pretty: true,                           // <!-- optional, prettyfy json true/false
@@ -129,13 +164,15 @@ async function fetch() {
 
     const responseIwaId = await iwaId({
 
+        base64images: true,                     // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+        base64videos: false,                    // <!-- optional but not recommended, it increases the size of the json file
+
         headers: {
             'cookie': _cookie,
             'user-agent': _userAgent,
             'x-ig-app-id': _xIgAppId
         },
 
-        base64images: false,                    // <!-- optional, but without it, you will be not able to store/show images
         file: "instagram-cache-byid.json",      // <!-- optional, instagram-cache.json is by default
         pretty: true,                           // <!-- optional, prettyfy json true/false
         time: 3600,                             // <!-- optional, reload contents after 3600 seconds by default
@@ -151,7 +188,7 @@ fetch()
 ```
 
 ## 🕹️ JSON outputs
-output example for `iwa` function on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
+output example for `iwaTag` or `iwa` function on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
 [
@@ -163,17 +200,30 @@ output example for `iwa` function on https://github.com/orsifrancesco/instagram-
     "comments": 0,
     "link": "https://www.instagram.com/p/CVtGnwashUP/",
     "text": "#helloworld #domain #check",
-    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA............."
+    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA.............",
+    "location": "Liverpool Cathedral",
+    "carousel": [
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226583_8126....",
+        "image": "/9j/4AAQSsasaakZJRgABAQAAAQABAAD/7QB8UGhvdGQAAAAAAGA............."
+      },
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314674373_678631710324...",
+        "image": "/9j/4AAQSkZJRgABAQAAAQdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA............."
+      }
+    ]
   },
   {
     "id": "2654027113529608497",
     "time": 1630604708,
     "imageUrl": "https://scontent-lcy1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/241221239_8640769...",
+    "videoUrl": "https://scontent-lcy1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/241221239_8640769...",
     "likes": 38,
     "comments": 0,
     "link": "https://www.instagram.com/p/CTU_5keMAkx/",
     "text": "#london #uk #unitedkingdom #tube #underground #overground #sunrise #morning #morningvibes #sky #metro #line #prospective",
-    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4Qkl..........."
+    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4Qkl...........",
+    "location": "Eiffle Tower, Paris France."
   }
 ]
 ```
@@ -222,4 +272,4 @@ Licensed under MIT
 
 ## ☕ About
 
-Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and/or [coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) is welcome :) 
+Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and [coffees](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) are welcome :) 
