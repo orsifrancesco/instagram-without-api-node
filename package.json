@@ -1,6 +1,6 @@
 {
   "name": "instagram-without-api-node",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A simple Node.js code to get unlimited instagram public pictures by every user and tag without api, without credentials (just token from cookies), just Instagram Scraping (with cookie and image data in base64).",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,8 @@
   "dependencies": {
     "image-to-base64": "^2.2.0",
     "request": "^2.88.2"
+  },
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/package/instagram-without-api-node/"
   }
 }
