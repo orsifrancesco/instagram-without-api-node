@@ -1,3 +1,13 @@
+# ⛔️ DEPRECATED
+
+Instagram moved the pictures array to another endpoint (with more than one redirect) making harder to catch images server side without scrapers like [Puppeter](https://pptr.dev/).
+
+Althought is not perfect <a href="https://orsi.me/sniffagram" rel="sniffagram"><img style="vertical-align: middle" alt="sniffagram" width="100" src="https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg" /></a> (as a temporary solution) works.
+
+Maybe in the future I will share a new version, but judging by the many demands without any kind of gratitude and collaboration from the community, I have lost the desire.
+
+<br/>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
